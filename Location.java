@@ -27,25 +27,25 @@ public class Location
     public ArrayList<String> getPaths() {return this.paths;}
 
     public GameCharacter getCharacter(String name)
-    {
+    { // returns a Character instance in response to its name
         for (GameCharacter gc : characters) {if (gc.getName().equals(name)) return gc;}
         return null;
     }
 
     public Artefact getArtefact(String name)
-    {
+    { // returns a Artefact instance in response to its name
         for (Artefact a : artefacts) {if (a.getName().equals(name)) return a;}
         return null;
     }
 
     public Furniture getFurniture(String name)
-    {
+    { // returns a Furniture instance in response to its name
         for (Furniture f : furnitures) {if (f.getName().equals(name)) return f;}
         return null;
     }
 
     public boolean isValidPath(String targetPath)
-    {
+    { // checks if the input path is valid
         if(this.paths.contains(targetPath)) {return true;}
         return false;
     }
@@ -53,7 +53,7 @@ public class Location
     public void addCharacter(GameCharacter gc) {characters.add(gc);}
     public void addArtefact(Artefact a) {artefacts.add(a);}
     public void addFurniture(Furniture f) {furnitures.add(f);}
-    public void addPath(String p) {paths.add(p);}
+    public void addPath(String pathName) {paths.add(pathName);}
 
     public void removeCharacter(GameCharacter gc) {characters.remove(gc);}
     public void removeArtefact(Artefact a) {artefacts.remove(a);}
@@ -62,21 +62,18 @@ public class Location
 
     public void setCharacter(String name, String description)
     {
-        if (name==null || description==null) {return;}
         GameCharacter c = new GameCharacter(name, description);
         characters.add(c);
     }
 
     public void setArtefact(String name, String description)
     {
-        if (name==null || description==null) {return;}
         Artefact a = new Artefact(name, description);
         artefacts.add(a);
     }
 
     public void setFurniture(String name, String description)
     {
-        if (name==null || description==null) {return;}
         Furniture f = new Furniture(name, description);
         furnitures.add(f);
     }

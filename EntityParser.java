@@ -26,6 +26,7 @@ public class EntityParser {
                     for (Graph g2 : subGraphs2) {
                         ArrayList<Node> nodesEnt = g2.getNodes(false);
                         for (Node nEnt : nodesEnt) {
+                            if (nEnt.getId().getId()==null || nEnt.getAttribute("description")==null) {continue;}
                             switch (g2.getId().getId()) {
                                 case "characters": loc.setCharacter(nEnt.getId().getId(), nEnt.getAttribute("description")); break;
                                 case "artefacts": loc.setArtefact(nEnt.getId().getId(), nEnt.getAttribute("description")); break;

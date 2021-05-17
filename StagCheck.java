@@ -32,7 +32,7 @@ public class StagCheck
     private static Process startNewServer()
     {
         try {
-            String[] command = {"java", "-classpath", "dot-parser.jar:json-parser.jar:.", "StagServer", "entities.dot", "actions.json"};
+            String[] command = {"java", "-classpath", "dot-parser.jar:json-parser.jar:", "StagServer", "data/extended-entities.dot", "data/extended-actions.json"};
             Process process = Runtime.getRuntime().exec(command);
             // Sleep for a bit to give the server some time to warm up
             Thread.sleep(2000);
