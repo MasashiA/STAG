@@ -26,6 +26,40 @@ public class Location
     public ArrayList<Furniture> getFurnitures() {return this.furnitures;}
     public ArrayList<String> getPaths() {return this.paths;}
 
+    public GameCharacter getCharacter(String name)
+    {
+        for (GameCharacter gc : characters) {if (gc.getName().equals(name)) return gc;}
+        return null;
+    }
+
+    public Artefact getArtefact(String name)
+    {
+        for (Artefact a : artefacts) {if (a.getName().equals(name)) return a;}
+        return null;
+    }
+
+    public Furniture getFurniture(String name)
+    {
+        for (Furniture f : furnitures) {if (f.getName().equals(name)) return f;}
+        return null;
+    }
+
+    public boolean isValidPath(String targetPath)
+    {
+        if(this.paths.contains(targetPath)) {return true;}
+        return false;
+    }
+
+    public void addCharacter(GameCharacter gc) {characters.add(gc);}
+    public void addArtefact(Artefact a) {artefacts.add(a);}
+    public void addFurniture(Furniture f) {furnitures.add(f);}
+    public void addPath(String p) {paths.add(p);}
+
+    public void removeCharacter(GameCharacter gc) {characters.remove(gc);}
+    public void removeArtefact(Artefact a) {artefacts.remove(a);}
+    public void removeFurniture(Furniture f) {furnitures.remove(f);}
+    public void removePath(String pathName) {paths.remove(pathName);}
+
     public void setCharacter(String name, String description)
     {
         if (name==null || description==null) {return;}
@@ -47,6 +81,6 @@ public class Location
         furnitures.add(f);
     }
 
-    public void setPath(String name){ this.paths.add(name);}
+    public void setPath(String name) {this.paths.add(name);}
 
 }

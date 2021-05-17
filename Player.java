@@ -4,53 +4,50 @@ public class Player
 {
     private String name;
     private int health;
-    private String location;
-    private ArrayList<String> inventory;
+    private int maxHealth;
+    private Location location;
+    private Location start;
+    private ArrayList<Artefact> inventory;
     
-    public Player(String name) 
+    public Player(String name, Location start, int health) 
     {
         this.name = name;
-        this.health = 3;
-        this.location = "start";
-        this.inventory = new ArrayList<String>();
+        this.health = health;
+        this.maxHealth = health;
+        this.location = start;
+        this.start = start;
+        this.inventory = new ArrayList<Artefact>();
     }
 
     public String getName() {return this.name;}
     public int getHealth() {return this.health;}
-    public String getLocation() {return this.location;}
-    public ArrayList<String> getInventory() {return this.inventory;}
-    public void changeLocation(String location) {this.location = location;} 
+    public Location getLocation() {return this.location;}
 
-
-    public void commandInventory()
+    public Artefact getBelonging(String artefactName)
     {
-
+        for (Artefact a : inventory) {if (a.getName().equals(artefactName)) return a;}
+        return null;
     }
 
-    public void commandGet(String artefact)
-    {
+    public ArrayList<Artefact> showInventory() {return this.inventory;}
+    public void addArtefact(Artefact artefact) {inventory.add(artefact);}
+    public void removeArtefact(Artefact artefact) {inventory.remove(artefact);}
+    public void increaseHealth() {if(health < maxHealth) health++;}
 
+    public String decreaseHealth() 
+    {
+        if(--health <= 0) {loseAndRestart(); return "You ran out of health and go back to the start point.";}
+        else {return "";}
     }
 
-    public void commandDrop(String artefact)
+    public void loseAndRestart()
     {
-
+        for (Artefact a : inventory) {location.addArtefact(a);};
+        this.inventory.clear();
+        this.location = this.start;
+        this.health = this.maxHealth;
     }
 
-    public void commandGoto(String destination)
-    {
-
-    }
-
-    public void commandLook()
-    {
-
-    }
-
-    // "inventory" (or "inv" for short): lists all of the artefacts currently being carried by the player
-    // "get": picks up a specified artefact from current location and puts it into player's inventory
-    // "drop": puts down an artefact from player's inventory and places it into the current location
-    // "goto": moves from one location to another (if there is a path between the two)
-    // "look": describes the entities in the current location and lists the paths to other locations
+    public void changeLocation(Location destination) {location = destination;}
     
 }

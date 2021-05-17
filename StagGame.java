@@ -8,6 +8,8 @@ public class StagGame
     private static ArrayList<Location> locations;
     private static ArrayList<Action> actions;
     private static ArrayList<Player> players;
+    private static Location startingPoint;
+    private static final int initialHealth = 3;
 
     public StagGame(String entityFilename, String actionFilename) 
     {
@@ -17,13 +19,64 @@ public class StagGame
         EntityParser.parse(entityFilename, locations); 
         // debugEntity();
         ActionParser.parse(actionFilename, actions);
-        //debugAction();
+        // debugAction();
+        startingPoint = locations.get(0);
     }
 
-    public void createPlayer(String name)
-    {
-        players.add(new Player(name));
-    } 
+    // public String commandInventory(String playerName, ArrayList<String> commands) throws StagCommandException
+    // {
+    //     int p_index = getPlayerIndex(playerName);
+    //     if (commands.size() != 0) {throw new StagCommandException();}
+    //     return players.get(p_index).commandInventory();
+    // }
+
+    // public String commandGet(String playerName, ArrayList<String> commands) throws StagCommandException
+    // {
+    //     Player p = players.get(getPlayerIndex(playerName));
+    //     if (commands.size() != 1) {throw new StagCommandException();}
+    //     String targetArtefact = commands.get(0);
+    //     if (!isExistArtefact(targetArtefact, players.get(p_index).getLocation())) {throw new StagCommandException();}
+    //     p.commandGet(targetArtefact);
+    //     return "get " + targetArtefact;
+    // }
+
+
+
+    // public String commandDrop(String playerName, ArrayList<String> commands) throws StagCommandException
+    // {
+    //     int index = getPlayerIndex(playerName);
+    //     if (commands.size() != 0) {throw new StagCommandException();}
+    //     return players.get(index).commandDrop();
+    // }
+
+    // public String commandGoto(String playerName, ArrayList<String> commands) throws StagCommandException
+    // {
+    //     int index = getPlayerIndex(playerName);
+    //     if (commands.size() != 0) {throw new StagCommandException();}
+    //     return players.get(index).commandGoto();
+    // }
+
+    // public String commandLook(String playerName, ArrayList<String> commands) throws StagCommandException
+    // {
+    //     int index = getPlayerIndex(playerName);
+    //     if (commands.size() != 0) {throw new StagCommandException();}
+    //     return players.get(index).commandLook();
+    // }
+    
+    // public String commandAction(String playerName, ArrayList<String> commands) throws StagCommandException
+    // {
+        
+    // }
+
+    // public int getPlayerIndex(String playerName) 
+    // {
+    //     for (int i=0; i<players.size(); i++) {
+    //         if (players.get(i).getName().equals(playerName)) {return i;}
+    //     }
+    //     return -1;
+    // }
+
+    public void createPlayer(String name) {players.add(new Player(name, startingPoint, initialHealth));} 
 
     public boolean isExistPlayer(String name)
     {
@@ -31,39 +84,45 @@ public class StagGame
         return false;
     }
 
-    public boolean isExistLocation(String name) 
+    public Player getPlayer(String name)
     {
-        for (Location l: locations) {if (l.getName().equals(name)) {return true;}}
-        return false;
+        for (Player p : players) {if (p.getName().equals(name)) return p;}
+        return null;
     }
 
-    public boolean isValidPath(String locationFrom, String locationTo) 
+    public Location getLocation(String name)
     {
-        for (Location l: locations) {
-            if (l.getName().equals(locationFrom) && l.getPaths().contains(locationTo)) {return true;}
-        }
-        return false;
+        for (Location l : locations) {if (l.getName().equals(name)) return l;}
+        return null;
     }
 
-    public boolean isExistAction(String trigger, String subjectString) 
+    public int getInitialHealthe() {return initialHealth;}
+
+    public Action getAction(String name) 
     {
-        for (Action a: actions) {
-            if (a.getTriggers().contains(trigger)) {
-                for (int i=0; i<a.getSubjects().size(); i++) {
-                    String subject = (String) a.getSubjects().get(i); // ClassCastException ??
-                    if(!subjectString.contains(subject)) {return false;}
-                }
-            }
-            return true;
-        }
-        return false;
+        for (Action a : actions) {if (a.getTriggers().contains(name)) return a;}
+        return null;
     }
 
-    public Action getAction(String trigger, String subjectString) 
+    public boolean isValidSubject(Action action, ArrayList<String> subjectCommands) 
     {
-        isExistAction(trigger, subjectString);
-        
+        for (String subject : action.getSubjects()) {if (!subjectCommands.contains(subject)) return false;}
+        return true;
     }
+
+    // public boolean isExistLocation(String name) 
+    // {
+    //     for (Location l: locations) {if (l.getName().equals(name)) {return true;}}
+    //     return false;
+    // }
+
+    // public boolean isValidPath(String locationFrom, String locationTo) 
+    // {
+    //     for (Location l: locations) {
+    //         if (l.getName().equals(locationFrom) && l.getPaths().contains(locationTo)) {return true;}
+    //     }
+    //     return false;
+    // }
 
     //debug
     public static void debugEntity()

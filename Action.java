@@ -1,14 +1,14 @@
-import org.json.simple.JSONArray;
+import java.util.*;
 
 public class Action
 {
-    private JSONArray triggers;
-    private JSONArray subjects;
-    private JSONArray consumed;
-    private JSONArray produced;
+    private ArrayList<String> triggers;
+    private ArrayList<String> subjects;
+    private ArrayList<String> consumed;
+    private ArrayList<String> produced;
     private String  narration;
 
-    public Action(JSONArray triggers, JSONArray subjects, JSONArray consumed, JSONArray produced, String narration)
+    public Action(ArrayList<String> triggers, ArrayList<String> subjects, ArrayList<String> consumed, ArrayList<String> produced, String narration)
     {
         this.triggers = triggers;
         this.subjects = subjects;
@@ -17,10 +17,10 @@ public class Action
         this.narration = narration;
     }
 
-    public JSONArray getTriggers() {return triggers;}
-    public JSONArray getSubjects() {return subjects;}
-    public JSONArray getConsumed() {return consumed;}
-    public JSONArray getProduced() {return produced;}
+    public ArrayList<String> getTriggers() {return triggers;}
+    public ArrayList<String> getSubjects() {return subjects;}
+    public ArrayList<String> getConsumed() {return consumed;}
+    public ArrayList<String> getProduced() {return produced;}
     public String getNarration() {return narration;}
 
 }

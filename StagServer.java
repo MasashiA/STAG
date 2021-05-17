@@ -45,14 +45,15 @@ class StagServer
     private void processNextCommand(BufferedReader in, BufferedWriter out) throws IOException
     {
         String line = in.readLine();
-        out.write("You said... " + line + "\n");
-        // // Process command
-        // String[] incomingString = line.split(": ");
-        // String playerName = incomingString[0];
-        // String command = incomingString[1];
-        // if (!isExistPlayer(playerName)) {addPlayer(playerName);}
-        // if (!isValidAction(command)) {throw new ActionException();}
-        // executeCommand(playerName, command);
+        out.write("You said... " + line + "\n"); // should be removed later
+
+        try {
+            StagController controller = new StagController(stagGame, line);
+            out.write(controller.toString());
+        } catch (StagException se) {
+            se.printStackTrace();
+            // out.write(se.toString());
+        }
     }
 
 }

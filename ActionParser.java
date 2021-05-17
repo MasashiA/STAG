@@ -19,23 +19,30 @@ public class ActionParser
             JSONArray actionList = (JSONArray) jsonObject.get("actions");
             for (int i=0; i<actionList.size(); i++) {
                 JSONObject a = (JSONObject) actionList.get(i);
-                JSONArray triggers = (JSONArray) a.get("triggers");
-                JSONArray subjects = (JSONArray) a.get("subjects");
-                JSONArray consumed = (JSONArray) a.get("consumed");
-                JSONArray produced = (JSONArray) a.get("produced");
+                ArrayList<String> triggers = parseJSONArray((JSONArray)a.get("triggers"));
+                ArrayList<String> subjects = parseJSONArray((JSONArray)a.get("subjects"));
+                ArrayList<String> consumed = parseJSONArray((JSONArray)a.get("consumed"));
+                ArrayList<String> produced = parseJSONArray((JSONArray)a.get("produced"));
                 String narration = (String) a.get("narration");
                 Action action = new Action(triggers, subjects, consumed, produced, narration);
                 actions.add(action);
             }
 
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (ParseException e) {
-            e.printStackTrace();
+        } catch (FileNotFoundException fnfe) {
+            System.out.println(fnfe);
+        } catch (IOException ioe) {
+            System.out.println(ioe);
+        } catch (ParseException pe) {
+            System.out.println(pe);
         } 
         
+    }
+
+    public static ArrayList<String> parseJSONArray(JSONArray array) 
+    {
+        ArrayList<String> list = new ArrayList<String>();
+        for (int i=0; i<array.size(); i++) {list.add((String)array.get(i));}
+        return list;
     }
 
 }
