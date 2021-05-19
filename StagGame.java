@@ -40,17 +40,13 @@ public class StagGame
 
     public int getInitialHealth() {return initialHealth;} // returns the initial health livel (now 3)
 
-    public ArrayList<Action> getActions(String trigger) 
+    public ArrayList<Action> getActions() { return actions;}
+
+    public ArrayList<Action> getActions(String trigger) // removed ??
     { // returns a list of Action instances in response to their trigger word
         ArrayList<Action> list = new ArrayList<Action>();
         for (Action a : actions) {if (a.getTriggers().contains(trigger)) list.add(a);}
         return list;
-    }
-
-    public boolean isValidSubject(Action action, ArrayList<String> subjectCommands) 
-    { // checks if the set of subject commands is valid to execute the action
-        for (String subject : action.getSubjects()) {if (!subjectCommands.contains(subject)) return false;}
-        return true;
     }
 
 }

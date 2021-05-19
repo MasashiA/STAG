@@ -44,6 +44,7 @@ class StagServer
             StagController controller = new StagController(stagGame, line); 
             out.write(controller.toString());
         } catch (StagException se) {
+            se.printStackTrace();
             out.write(se.toString());
         }
     }
