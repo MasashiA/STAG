@@ -2,11 +2,11 @@
     "actions": [
 
         {
-            "triggers": ["open", "brow"],
-            "subjects": ["potion", "key"],
+            "triggers": ["chop", "brow", "kick"],
+            "subjects": ["potion", "axe", "elf"],
             "consumed": ["potion"],
             "produced": [],
-            "narration": "You open the window"
+            "narration": "You break the potion"
         },
 
         {

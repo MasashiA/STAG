@@ -37,16 +37,9 @@ public class StagGame
         for (Location l : locations) {if (l.getName().equals(name)) return l;}
         return null;
     }
-
-    public int getInitialHealth() {return initialHealth;} // returns the initial health livel (now 3)
-
+    
     public ArrayList<Action> getActions() { return actions;}
-
-    public ArrayList<Action> getActions(String trigger) // removed ??
-    { // returns a list of Action instances in response to their trigger word
-        ArrayList<Action> list = new ArrayList<Action>();
-        for (Action a : actions) {if (a.getTriggers().contains(trigger)) list.add(a);}
-        return list;
-    }
+    
+    public int getInitialHealth() {return initialHealth;} // returns the initial health livel (now 3)
 
 }

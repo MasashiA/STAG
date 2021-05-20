@@ -29,7 +29,7 @@ public class Player
         return null;
     }
 
-    public ArrayList<Artefact> showInventory() {return this.inventory;}
+    public ArrayList<Artefact> getInventory() {return this.inventory;}
     public void addArtefact(Artefact artefact) {inventory.add(artefact);}
     public void removeArtefact(Artefact artefact) {inventory.remove(artefact);}
     public void changeLocation(Location destination) {location = destination;}

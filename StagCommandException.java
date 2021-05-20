@@ -1,5 +1,4 @@
-
-public class StagCommandException extends StagException
+public class StagCommandException extends Exception
 {
     String message; 
     public StagCommandException() {}

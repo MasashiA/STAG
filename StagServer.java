@@ -15,7 +15,7 @@ class StagServer
         try {
             ServerSocket ss = new ServerSocket(portNumber);
             System.out.println("Server Listening");
-            stagGame = new StagGame(entityFilename, actionFilename); //parse files and initialize the game
+            stagGame = new StagGame(entityFilename, actionFilename); //parse files and initialize the game entities
             while(true) acceptNextConnection(ss); 
         } catch(IOException ioe) {
             System.err.println(ioe);
@@ -40,11 +40,10 @@ class StagServer
     private void processNextCommand(BufferedReader in, BufferedWriter out) throws IOException
     {
         String line = in.readLine();
-        try { // process incoming commands by the controller (it retains the output string)
+        try { // process incoming commands wtih the Controller class instance (it outputs result string after the process)
             StagController controller = new StagController(stagGame, line); 
             out.write(controller.toString());
-        } catch (StagException se) {
-            se.printStackTrace();
+        } catch (StagCommandException se) {
             out.write(se.toString());
         }
     }
